@@ -87,14 +87,7 @@ namespace Devdog.LosPro
 
         public virtual void InitSightTrigger()
         {
-            // _sightTrigger = GetComponentInChildren<SphereCollider>();
-            // if (_sightTrigger == null)
-            // {
-                var obj = new GameObject("_Col");
-                obj.transform.SetParent(transform, false);
-                _sightTrigger = obj.AddComponent<SphereCollider>();
-            // }
-
+            _sightTrigger = GetOrCreateSightTrigger();
             _sightTrigger.isTrigger = true;
             _sightTrigger.radius = config.viewingDistance;
             _sightTrigger.GetOrAddComponent<ObserverTriggerHelperBehaviour>();
@@ -110,6 +103,20 @@ namespace Devdog.LosPro
             {
                 DevdogLogger.LogWarning("Settings database not set on LosManager");
             }
+        }
+
+        private SphereCollider GetOrCreateSightTrigger()
+        {
+            Transform colliderTransform = transform.Find("_Col");
+            if(colliderTransform != null)
+            {
+                return colliderTransform.GetComponent<SphereCollider>();
+            }
+
+            var obj = new GameObject("_Col");
+            obj.transform.SetParent(transform, false);
+            SphereCollider collider = obj.AddComponent<SphereCollider>();
+            return collider;                            
         }
         
         public void OnTargetCameIntoRange(SightTargetInfo info)
