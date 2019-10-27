@@ -1,0 +1,9 @@
+{
+  "name": "io.devdog.lospro",
+  "displayName": "LOS Pro",
+  "version": "1.0.0",
+  "dependencies": {
+    "io.devdog.general": "1.0.0"
+  },
+  "description": "Line of Sight Pro package from Github\n\n(C) 2019 Devdog.io\nUPM package by Andrea Repetto (https://github.com/andrea-repetto)"
+}
